@@ -143,7 +143,7 @@
                         </div>
                     </div>
                     <div class="col-md-2">
-                        <button class="btn btn-dark border-0 w-100">Search</button>
+                        <button class="btn btn-dark border-0 w-100" id="searchBtn">Search</button>
                     </div>
                 </div>
             </div>
@@ -726,6 +726,33 @@
 
     <!-- Template Javascript -->
     <script src="js/main.js"></script>
+    <script>
+        $(document).ready(function() {
+            $("#searchBtn").click(function() {
+                // Get the search parameters from the form fields
+                var keyword = $("#keyword").val();
+                var category = $("#category").val();
+                var location = $("#location").val();
+    
+                // Make an AJAX request to the PHP script to process the search
+                $.ajax({
+                    url: "search.php", // Replace with the actual path to your PHP script
+                    method: "POST",
+                    data: {
+                        keyword: keyword,
+                        category: category,
+                        location: location
+                    },
+                    success: function(response) {
+                        // Update the page with the search results
+                        // You can display the results in a specific div or element
+                        $("#searchResults").html(response);
+                    }
+                });
+            });
+        });
+    </script>
+    
 </body>
 
 </html>
